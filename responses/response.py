@@ -1,48 +1,30 @@
+from responses.basemodel import BaseModel
+from responses.location import Location
+from responses.sun import Sun
+from responses.forecast import Forecast
 from datetime import datetime
-from models.basemodel import Base
 
 
-COPYRIGHT = "https://www.meteoam.it"
+class Response(BaseModel):
 
-
-class General(Base):
-
-    copyright: str = COPYRIGHT
-    location: str = None
-    latitude: float = None
-    longitude: float = None
-    datetime: str = None
+    source: str = "www.meteoam.it"
+    location: Location
+    timestamp: str
+    forecast: Forecast
+    sun: Sun
 
 
     def from_dict(data: dict):
 
-        obj = General()
-
-
-        obj.location = data["location"]
-
-        coords = data["coordinates"].split(" / ")
-        obj.latitude = float(coords[0].split(" ")[1].strip())
-        obj.longitude = float(coords[1].split(" ")[1].strip())
-
-        obj = General()
-
-
-        obj.location = data["location"]
-
-        coords = data["coordinates"].split(" / ")
-        obj.latitude = float(coords[0].split(" ")[1].strip())
-        obj.longitude = float(coords[1].split(" ")[1].strip())
-
-        # datetime 
-        obj.datetime = General.__get_isodate(data["datetime"])
-
-        return obj
-        # datetime 
-        obj.datetime = self.__get_isodate(data["datetime"])
-
-        return obj
+        return Response(
+            location = Location.from_dict(data),
+            timestamp = Response.__get_isodate(data["datetime"]),
+            forecast = Forecast.from_dict(data),
+            sun = Sun.from_dict(data)
+        )
     
+
+
 
     def __get_isodate(textual_datetime: str) -> str:
 

@@ -1,6 +1,6 @@
 from assets.xpath import XPATH
 from selenium import webdriver
-from models.forecast import *
+from responses.response import Response
 from selenium.webdriver.common.by import By
 
 
@@ -59,4 +59,4 @@ class WebScraper():
 
         data = self.get_data()
 
-        return Forecast.from_dict(data)
+        return Response.from_dict(data)
