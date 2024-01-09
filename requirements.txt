@@ -1,0 +1,5 @@
+fastapi==0.108.0
+pydantic==1.10.2
+selenium==4.16.0
+uvicorn==0.25.0
+xmltodict==0.13.0
