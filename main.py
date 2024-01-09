@@ -31,5 +31,5 @@ def get_weather(location: str, xml: bool = False):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(host="localhost", port=8000, reload=True, app="main:app")
+    uvicorn.run(host="0.0.0.0", port=80, reload=False, app="main:app")
     
